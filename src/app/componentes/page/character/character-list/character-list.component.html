@@ -1,4 +1,4 @@
-<div class="row" infinite-scroll (scrolled)="onScrollDown()">
+<div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let personagem of personagens">
         <div class="card">            
             <div class="image">
@@ -14,7 +14,7 @@
                     <a [routerLink]="['/character-details', personagem.id]">
                         <h2>{{personagem.name}}</h2>
                     </a>
-                    <h4 class="text-muted">{{personagem.gender}}</h4>
+                    <h4 class="text-muted">{{personagem.status}}</h4>
                     <small class="text-muted">{{personagem.created | date}}</small>
                 </div>
             </div>
@@ -25,5 +25,11 @@
         <p>Sem resultados</p>
     </div>
 </div>
-<button class="btn btn-dark">Go UP</button>
+<div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <button class="btn btn-dark"
+    style="align-content: center;"
+    [ngClass]="'no-hidden'"
+    (click)="onScrollUp()"
+    *ngIf="showGoUpButton">Go UP</button>
+</div>
     

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { ICharacter } from '@app/shared/interfaces/ICharacter.interface';
 import { PersonagemService } from '@app/shared/services/character.service';
@@ -16,6 +16,7 @@ type RequestInfo = {
 })
 export class CharacterListComponent {
   personagens: ICharacter[] = [];
+  showGoUpButton = false;
 
   info: RequestInfo = {
     next: '',
@@ -69,6 +70,16 @@ export class CharacterListComponent {
         }
       });
   };
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void{
+    const offSet = window.pageYOffset;
+    if(offSet || this.document.documentElement.scrollTop || this.document.body.scrollTop > this.showScrollHeigh){
+      this.showGoUpButton = true;
+    }else if(this.showGoUpButton && (offSet || this.document.documentElement.scrollTop || this.document.body.scrollTop < this.hiddeScrollHeight)){
+      this.showGoUpButton = false;
+    }
+  }
 
   onScrollDown(): void{
     if(this.info.next){
