@@ -1,0 +1,29 @@
+<div class="row" infinite-scroll (scrolled)="onScrollDown()">
+    <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let personagem of personagens">
+        <div class="card">            
+            <div class="image">
+                <a [routerLink]="['/character-details', personagem.id]">
+                    <img [src]="personagem.image"
+                         [alt]="personagem.name"
+                         class="card-img-top"
+                    />
+                </a>
+            </div>
+            <div class="card-inner" style="text-align: center;">
+                <div class="header">
+                    <a [routerLink]="['/character-details', personagem.id]">
+                        <h2>{{personagem.name}}</h2>
+                    </a>
+                    <h4 class="text-muted">{{personagem.gender}}</h4>
+                    <small class="text-muted">{{personagem.created | date}}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 mt-5 container-notFound" *ngIf="personagens.length <=0">
+        <p>Sem resultados</p>
+    </div>
+</div>
+<button class="btn btn-dark">Go UP</button>
+    
